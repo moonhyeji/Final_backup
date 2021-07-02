@@ -1,0 +1,11 @@
+package com.kh.bnpp.controller;
+
+@Controller
+public class MainController {
+	
+	@RequestMapping
+	public String index("/") {
+		return "ws1"
+	}
+
+}

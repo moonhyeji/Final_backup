@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SpringProjectBnpp&apos; to &apos;SpringProjectBnpp01&apos;" description="Rename resource &apos;SpringProjectBnpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/SpringProjectBnpp" name="SpringProjectBnpp01" stamp="1625124704087" updateReferences="true"/>
+</session>

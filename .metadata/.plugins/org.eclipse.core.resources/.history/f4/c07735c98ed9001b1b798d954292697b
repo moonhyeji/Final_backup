@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+	var ws;
+	
+	$(document).ready(function(){
+		$("#enterBtn").click(function(){
+			ws = new WebSocket("ws://58.123.45.14/websocket_bean/ws");
+			
+			ws.onerror = onError;
+			ws.onmessage = onMessage;
+			ws.onopen = onOpen;
+			ws.onclose = onClose;
+		});
+		
+		$("#exitBtn").click(function(){
+			ws.close();
+		});
+		
+		$("#sendBtn").click(function(){
+			sendMessage();
+		});
+	});
+	function sendMessage(){
+		ws.send(
+				$("#message").val()		
+		);
+	}
+	function onMessage(event){
+		var data = event.data;
+		$("#data").append(data + "<br>");
+	}
+	
+	function onOpen(event){
+		$("#data").append("클라측 onOpne() : Connection Opened! <br>");
+	}
+	
+	function onClose(event){
+		$("#data").append("클라측 onClose() : Connection Closed! <br>");
+	}
+	
+	function onOpen(event){
+		$("#data").append("클라측 onError() : Connection Error! <br>");
+	}
+</script>
+
+</head>
+<body>
+		<input type="button" id="enterBtn" value="ENTER"/>
+		<input type="button" id="exitBtn" value="EXIT"/>
+				<p>
+				session ID : <input type="text" id="sessionid" value="" size="50"/>
+				<p>
+				<input type="text" id="message" size="50"/>
+				<input type="button" id="sendBtn" size="SEND"/>
+				
+				<div id="data"></div>
+
+</body>
+</html>

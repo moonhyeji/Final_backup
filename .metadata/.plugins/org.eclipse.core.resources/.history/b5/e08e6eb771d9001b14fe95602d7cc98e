@@ -1,0 +1,6 @@
+package com.kh.bnpp.controller;
+
+@Controller
+public class MainController {
+
+}
