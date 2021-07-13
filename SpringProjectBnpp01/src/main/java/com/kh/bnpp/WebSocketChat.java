@@ -22,20 +22,27 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @ServerEndpoint(value="/echo.do")
 public class WebSocketChat {
-    
+	
+	
     private static final List<Session> sessionList=new ArrayList<Session>();;
+    
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
+   
     public WebSocketChat() {
+    	
         System.out.println("웹소켓(서버) 객체생성***************");
     }
     
     @OnOpen
     public void onOpen(Session session) {
         logger.info("Open session id:"+session.getId());
+        
         try {
             final Basic basic=session.getBasicRemote();  //초반에 설정해두었던 endPoint의 value값인 아이디 
             
             basic.sendText("대화방에 연결 되었습니다.");
+            
+            
         }catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());
@@ -70,15 +77,21 @@ public class WebSocketChat {
      */
     @OnMessage
     public void onMessage(String message,Session session) {
+    	// 오류고치기! 
+    	String sender = message.split(",")[1];   // 사용자  
     	
-    	String sender = message.split(",")[1];
-    	
-    	message = message.split(",")[0];
+    	message = message.split(",")[0];  // 내가 보낸 메세지   ,기준으로 0번지의 애를 message로 넣음. 
     	
         logger.info("Message From "+sender + ": "+message);
+        
         try {
-            final Basic basic=session.getBasicRemote();
-            basic.sendText("<나> : "+message);
+            //final Basic basic=session.getBasicRemote();
+            
+           // basic.sendText("<나> : "+message);
+        	
+           session.getBasicRemote().sendText("<나> : "+message);
+           
+           
         }catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());

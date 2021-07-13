@@ -34,7 +34,6 @@ private Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 //		if(request.getSession().getAttribute("login") == null) {	
 //			response.sendRedirect("loginform.do");
 //		}
-		
 		// return false;
 		return true;
 	}
